@@ -1,0 +1,639 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background: white;
+}
+
+.container-model {
+  align-items: center;
+  width: 450px;
+  height: 300px;
+}
+
+.container-fluid {
+  margin-top: -2%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for the menu bar */
+.menu-bar {
+  background-color: white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; /* Align items to the right */
+  gap: 30px; /* Add space between items */
+  position: relative;
+}
+
+.menu-bar a {
+  display: inline-block; /* Display menu items inline */
+  color: rgb(0, 0, 0);
+  text-align: center;
+  width: fit-content;
+  padding: 14px 5px;
+  text-decoration: none;
+}
+
+.menu-bar a:hover {
+  background-color: #eaeaea;
+  color: #4caf50;
+}
+
+.active {
+  background-color: #4caf50;
+}
+
+/* Style for the responsive navigation menu */
+.menu-bar.responsive {
+  position: relative;
+}
+
+.menu-bar.responsive a {
+  float: none;
+  display: block;
+  text-align: left; /* Align menu items to the right */
+}
+
+/* Style for the login and signup */
+.signup-box {
+  position: relative;
+  width: 360px;
+  height: 530px;
+  margin: auto;
+  background-color: rgb(244, 244, 244);
+  box-shadow: 10px 0 15px -5px rgba(0, 0, 0, 0.2),
+    20px 0 30px -10px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+}
+
+.login-box {
+  position: relative;
+  width: 360px;
+  height: 380px;
+  margin: auto;
+  background-color: rgb(244, 244, 244);
+  box-shadow: 10px 0 15px -5px rgba(0, 0, 0, 0.2),
+    20px 0 30px -10px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+}
+
+h1 {
+  text-align: center;
+  padding-top: 15px;
+}
+
+h4 {
+  text-align: center;
+}
+
+form {
+  width: 300px;
+  margin-left: 20px;
+}
+
+form label {
+  display: flex;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+form input {
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border: 1px solid gray;
+  border-radius: 6px;
+  outline: none;
+}
+.ls,
+.lsbutton {
+  width: 70px;
+  height: 35px;
+  margin-top: 20px;
+  border: none;
+  background-color: #49c1a2;
+  color: white;
+  font-size: 18px;
+  padding: 0px;
+  margin-left: 110px;
+  display: grid;
+  align-items: center;
+}
+
+.lsbutton {
+  margin-left: 132px;
+}
+
+.lslabel {
+  width: 200px;
+  margin-right: 15px;
+  text-align: left;
+}
+
+p {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 15px;
+}
+.para-2 {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  color: rgb(34, 37, 40);
+  font-size: 15px;
+  margin-top: 10px;
+  padding: 10px;
+}
+.para-2 a {
+  color: #49c1a2;
+  top: -9px;
+  width: fit-content;
+}
+/*  */
+.overlay {
+  border-radius: 50px;
+  align-content: space-between;
+  width: fit-content;
+  height: fit-content;
+  display: none;
+  position: fixed;
+  top: 22%;
+  bottom: 0;
+  left: 40%;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  background-image: linear-gradient(
+    180deg,
+    rgb(205, 236, 234),
+    rgba(255, 252, 192, 0.125)
+  );
+  z-index: 1000; /* Ensure the overlay is above everything else */
+}
+
+nav {
+  position: sticky;
+  bottom: 0;
+  height: 100vh;
+  left: 0;
+  width: 90px;
+  /* width: 280px; */
+  background: #fff;
+  overflow: hidden;
+  transition: 1s;
+}
+nav:hover {
+  width: 280px;
+  transition: 0.5s;
+}
+
+a {
+  position: relative;
+  width: 280px;
+  font-size: 14px;
+  color: white;
+  display: table;
+  padding: 10px;
+}
+nav .fas {
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+nav .fa {
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+a:hover {
+  color: #4ad489;
+  transition: 0.5s;
+}
+.nav-item {
+  position: relative;
+  top: 20px;
+  margin-left: 10px;
+}
+
+a:hover {
+  background: rgb(53, 53, 53);
+}
+
+/* .login {
+  position: absolute;
+  bottom: 85px;
+} */
+
+.logout {
+  position: absolute;
+  bottom: 0px;
+}
+.sub-item {
+  background-color: black;
+  left: 80px;
+  border-radius: 30px;
+  margin-right: 10px;
+}
+
+.container {
+  display: flex;
+  position: relative;
+  z-index: 1000; /* Ensure the overlay is above everything else */
+  /* background-image: linear-gradient(
+    180deg,
+    rgb(205, 236, 234),
+    rgba(255, 252, 192, 0.125)
+  ); */
+}
+/* .loginContent, .signupContent {
+  display: flex;
+  position: relative;
+  width:90%;
+  height:870px;
+  z-index: 1000; /* Ensure the overlay is above everything else */
+/* background-image: linear-gradient(
+    180deg,
+    rgb(205, 236, 234),
+    rgba(255, 252, 192, 0.125)
+  );
+} */
+
+/* Main Section */
+main {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+}
+
+.dashboardContent,
+.stocksContent,
+.currencyContent,
+.commodityContent,
+.shylockContent,
+.loanContent,
+.fixedContent,
+.liquidContent,
+.settingsContent {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+}
+.main-top {
+  position: relative;
+  top: 10px;
+  display: flex;
+  width: 100%;
+}
+
+/*Dashboard Section  */
+.dashboard {
+  text-transform: capitalize;
+  position: relative;
+  top: 40px;
+  overflow: hidden;
+}
+.attendance-list {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 15px;
+  min-width: 100%;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+}
+
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: auto; /* You can change this to 'scroll' if you want the scrollbar always visible */
+}
+table thead tr {
+  color: #fff;
+  background: #34af6d;
+  text-align: left;
+  font-weight: bold;
+}
+.table th,
+.table td {
+  padding: 12px 15px;
+}
+.table td {
+  color: black;
+  background-color: white;
+}
+.table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+.table tbody tr:nth-of-type(odd) {
+  background: #f3f3f3;
+}
+.table tbody tr.active {
+  font-weight: bold;
+  color: #4ad489;
+}
+.table tbody tr:last-of-type {
+  border-bottom: 2px solid #4ad489;
+}
+.table button {
+  padding: 6px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+  color: #000000;
+  left: 0%;
+  border: 1px solid #4ad489;
+}
+.table button:hover {
+  background: #4ad489;
+  color: #000000;
+  transition: 0.5rem;
+}
+
+/* Trading Section */
+.stocks,
+.currency,
+.commodity,
+.settings {
+  text-transform: capitalize;
+  position: relative;
+  top: 40px;
+  overflow: hidden;
+  box-shadow: 10px 0 15px -5px rgba(0, 0, 0, 0.2),
+    20px 0 30px -10px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+}
+
+.stocks-list,
+.currency-list,
+.commodity-list,
+.settings-list {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Finance Section */
+.shylock,
+.loan {
+  text-transform: capitalize;
+  position: relative;
+  top: 40px;
+  overflow: hidden;
+  box-shadow: 10px 0 15px -5px rgba(0, 0, 0, 0.2),
+    20px 0 30px -10px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+}
+.shylock-list,
+.loan-list {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Assets Section */
+.fixed,
+.liquid {
+  text-transform: capitalize;
+  position: relative;
+  top: 40px;
+  overflow: hidden;
+  box-shadow: 10px 0 15px -5px rgba(0, 0, 0, 0.2),
+    20px 0 30px -10px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+}
+.fixed-list,
+.liquid-list {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* form design */
+
+.form-design {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  top: 20px;
+  position: relative;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+label {
+  width: 150px;
+  margin-right: 15px;
+  text-align: right;
+}
+
+input,
+.submit {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+.submit {
+  margin-left: 150px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.submit:hover {
+  background-color: #45a049;
+}
+.form-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 500px;
+  position: relative;
+  background-color: white;
+  width: 80%;
+  padding: 5%;
+  border-radius: 20px;
+  top: 30px;
+}
+.profile-items {
+  color: rgb(58, 53, 53);
+}
+
+.side {
+  box-shadow: 10px 0 15px -5px rgba(0, 0, 0, 0.2),
+    20px 0 30px -10px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.5);
+  background-color: black;
+}
+
+.ActualdashboardContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 95%;
+  background-color: #ffffff;
+  height: 780px;
+  margin: auto;
+  padding: 10px;
+}
+
+.dashboard {
+  box-shadow: 10px 0 15px -5px rgba(0, 0, 0, 0.2),
+    20px 0 30px -10px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 255, 255, 0.5);
+  background-color: black;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  background-color: #ffffff;
+  height: 200px;
+  width: 50%;
+  padding: 30px;
+}
+.column {
+  background-color: #ffffff;
+  height: 300px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  margin-bottom: 60px;
+  column-gap: 20px;
+  row-gap: 20px;
+  margin-left: 2%;
+}
+
+.promo_card {
+  width: 100%;
+  color: #fff;
+  margin-top: 5px;
+  border-radius: 8px;
+  padding: 0.5rem 1rem 1rem 3rem;
+  /* background: rgb(37, 37, 37); */
+  background: linear-gradient(
+    to bottom,
+    rgb(0, 0, 0),
+    rgb(0, 0, 0),
+    rgb(0, 0, 0),
+    rgb(0, 0, 0),
+    rgb(0, 0, 0),
+    rgb(0, 0, 0),
+    rgb(0, 0, 0),
+    rgba(0, 0, 0, 0.745)
+  );
+}
+.promo_card h1 {
+  margin: 20px;
+}
+.promo_card span,
+button {
+  margin: 10px;
+}
+.promo_card button {
+  display: block;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* .loginbg {
+  height: 900px;
+  width: 90%;
+  background-image: linear-gradient(
+    180deg,
+    rgb(205, 236, 234),
+    rgba(255, 252, 192, 0.125)
+  );
+} */
+
+p {
+  color: #000000;
+}
+
+.fa-solid,
+.fas {
+  font-weight: 900;
+  font-size: xx-large;
+}
+.h {
+  text-align: center;
+  padding: 5px;
+  left: 3%;
+}
+
+#lentAmountChartContainer {
+  margin-top: 30px;
+  width: 100%; /* Adjust the max-width as needed */
+}
+
+#loanBalanceChartContainer {
+  margin-top: 30px;
+
+  width: 100%; /* Adjust the max-width as needed */
+}
+
+.row1 {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.row2 {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.rowgraph {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  left: 5%;
+  column-gap: 10%;
+}

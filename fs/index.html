@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Finance Management</title>
+      <link rel="stylesheet" href="index.css">
+      <!-- Font Awesome Cdn Link -->
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+      <!-- Chart.js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      </head>
+    <body ng-app="FinanceApp">
+      <!-- Menu bar -->
+      <div class="menu-bar" id="myMenu">
+        <a href="#"><!--About--></a>
+        <a href="#"><!--Services--></a>
+        <a href="#"><!--Contact--></a>
+      </div>
+    <div class="container-fluid">
+      <div class="container">
+        <nav class="side">
+          <ul>
+            <li>
+              <a href="#login" class="login" onclick="openModal('login')">
+                <i class="fa fa-sign-in"></i>
+                <span class="nav-item">Log in</span>
+              </a>
+            </li>
+            <li>
+              <a href="#dashboardContent" class="home">
+              <i class="fas fa-solid fa-user"> </i>
+              <span class="nav-item" id="usernameSpan">
+              </span>
+            </li>
+            <li>
+              <a href="#ActualdashboardContent">
+                <i class="fas fa-solid fa-house"></i>
+                <span class="nav-item">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a class="sub-btn" href="#dashboardContent">
+                <i class="fas fa-solid fa-money-bill-trend-up"></i>
+                <span class="nav-item">Tradings</span>
+                <i class="dropdown"></i>
+              </a>
+              <div class="sub-menu">
+                <a href="#stocksContent" class="sub-item" >Stocks</a>
+                <a href="#currencyContent" class="sub-item" >Currency</a>
+                <a href="#commodityContent" class="sub-item">Commodity</a>
+              </div>
+              </a>
+            </li>
+            <li>
+              <a class="sub-btn" href="#dashboardContent">
+                <i class="fas fa-solid fa-chart-area"></i>
+                <span class="nav-item">Finances</span>
+                <i class="dropdown"></i>
+              </a>
+              <div class="sub-menu">
+                <a href="#shylockContent" class="sub-item">Shylock</a>
+                <a href="#loanContent" class="sub-item">Loan</a>
+              </div>
+              </a>
+              </a>
+            </li>
+            <li>
+              <a class="sub-btn" href="#dashboardContent">
+                <i class="fas fa-solid fa-coins"></i>
+                <span class="nav-item">Assets</span>
+                <i class="dropdown"></i>
+              </a>
+              <div class="sub-menu">
+                <a href="#fixedContent" class="sub-item" onclick="showContent('fixedContent')">Fixed</a>
+                <a href="#liquidContent" class="sub-item" onclick="showContent('liquidContent')">Liquid</a>
+              </div>
+              </a>
+              </a>
+            </li>
+            <li>
+              <a href="#settingsContent">
+                <i class="fas fa-cog"></i>
+                <span class="nav-item">Settings</span>
+              </a>
+            </li>
+            <li>
+              <a class="logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="nav-item" >Log out</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+  <!-- dashboard -->
+<section class="ActualdashboardContent" id="ActualdashboardContent">
+
+  <div class="promo_card">
+    <h1>Welcome to MY FINANCE</h1>
+    <span class="h">"Navigate Your Financial World with Precision: Monitor Income, Track Expenses, Optimize Profits, and Master Investments with Our Comprehensive Platform."</span>
+    <button>Learn More</button>
+  </div>
+  <div class="row">
+  <div class="dashboard">
+  <div class="column">
+    <h2>total expense</h2>
+  </div>
+  <div class="column">
+
+    <i class="fa-solid fa-dollar-sign" style="color: #000000;"></i>  </div>
+  <div class="column" id="total_expense"></div>
+</div>
+
+<div class="dashboard">
+  <div class="column">
+    <h2>total income</h2>
+  </div>
+  <div class="column">
+    <i class="fa-solid fa-hand-holding-dollar"></i>
+</div>
+  <div class="column"  id="total_income"></div>
+</div>
+
+<div class="dashboard">
+  <div class="column">
+    <h2>profit</h2>
+  </div>
+  <div class="column">
+<i class="fa-solid fa-money-bill-trend-up" style="color: #000000;"></i>  </div>
+   <!-- Display total profit in this division -->
+  <div class="column"  id="total_profit"></div>
+</div>
+
+<div class="dashboard">
+  <div class="column">
+    <h2>savings</h2>
+  </div>
+  <div class="column">
+    <i class="fa-solid fa-coins" style="color: #000000;"></i>
+  </div>
+  <!-- Display total savings in this division -->
+  <div class="column" id="total_savings"></div>
+</div>
+</div>
+
+<div class="row">
+  <div class="table-container">
+    <h2 class="text-center mb-4">Trading-Asset Table</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>SL</th>
+                <th>Category</th>
+                <th>Trading</th>
+                <th>Assets</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Total Expenses</td>
+                <td id="total_trading_expense"></td>
+                <td id="total_assets_expense"></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Total Income</td>
+              <td id="total_trading_income"></td>
+              <td id="total_assets_income"></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Total Profit</td>
+            <td id="total_trading_profit"></td>
+            <td id="total_assets_profit"></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Total Savings</td>
+            <td id="total_trading_savings"></td>
+            <td id="total_assets_savings"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="rowgraph">
+<div class="row1">
+  <h2 class="text-center mb-4">Shylock Table</h2>
+    <div id="lentAmountChartContainer">
+        <canvas id="lentAmountChart"></canvas>
+    </div>
+</div>
+<div class="row2">
+  <h2 class="text-center mb-4">Loan Balance Over Time</h2>
+    <div id="loanBalanceChartContainer">
+        <canvas id="loanBalanceChart"></canvas>
+    </div>
+</div>
+</div>
+<!-- <div class="table-container" ng-app="myApp" >
+  <table class="table">
+      <thead>
+          <tr>
+              <th>SL</th>
+              <th>Stocks</th>
+              <th>Currency</th>
+              <th>Commodity</th>
+              <th>Loan</th>
+              <th>Shylock</th>
+              <th>Fixed Assets</th>
+              <th>Liquid Assets</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="stock in stocks.slice(0, 5)">
+              <td>{{$index + 1}}</td>
+              <td>{{ stock.name }}</td>
+              <td>{{ stock.currency }}</td>
+              <td>{{ stock.commodity }}</td>
+              <td>{{ stock.loan }}</td>
+              <td>{{ stock.shylock }}</td>
+              <td>{{ stock.fixed_assets }}</td>
+              <td>{{ stock.liquid_assets }}</td>
+          </tr>
+      </tbody>
+  </table>
+</div>  -->
+
+
+</div>
+</section>
+
+  <!-- Login Modal -->
+  <div class="overlay" id="loginModal">
+   <section class="LoginContent" id="LoginContent">
+     <div class="login-box">
+       <h1>Login</h1>
+       <form id="loginForm" action="login_signup.php" method="POST">
+         <label class="lslabel">Email or Username</label>
+         <input type="text" id="emailOrUsername" name="emailOrUsername" placeholder="Enter your email or username" required>
+         <label class="lslabel">Password</label>
+         <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+         <button class="ls" type="submit" onclick="login()">Login</button>
+       </form>
+       <p class="para-2">
+         Don't have an account? <a href="#SignupContent" onclick="openModal('signup')">Sign Up Here</a>
+       </p>
+       <button class="lsbutton" onclick="closeModal()">Close</button>
+     </div>
+   </section>
+</div>
+
+ <!-- Signup Modal -->
+ <div id="signupModal" class="overlay">
+   <section class="SignupContent" id="SignupContent">
+     <div class="signup-box">
+       <h1>Sign Up</h1>
+       <form id="signupForm" action="login_signup.php" method="POST">
+         <label class="lslabel">Name</label>
+         <input type="text" id="name" name="name" placeholder="Enter your name" required>
+         <label class="lslabel">User Name</label>
+         <input type="text" id="username" name="username" placeholder="Enter your username" required>
+         <label class="lslabel">Email</label>
+         <input type="email" id="email" name="email" placeholder="Enter your email" required>
+         <label class="lslabel">Password</label>
+         <input type="password" id="password" name="password" placeholder="Enter your password" required>
+         <button type="submit" class="ls">Sign Up</button>
+       </form>
+         <p class="para-2">
+           Already have an account? <a href="#LoginContent" onclick="openModal('login')">Login here</a>
+         </p>
+         <button class="lsbutton" onclick="closeModal()">Close</button>
+     </div>
+    </section>
+ </div>
+
+ 
+<!-- profile -->
+<section class="dashboardContent" id="dashboardContent">
+  <div class="Profile">
+       
+    <div class="form-item" id="displayDivision" ng-controller="settingsCntrl">
+      <h1>Profile</h1>
+
+      <div class="profile-items">
+        <label>User Name:</label>
+        <span>{{ websiteSettingsData.user_name }}</span>
+      </div>
+      <div class="profile-items">
+        <label>User Number:</label>
+        <span>{{ websiteSettingsData.user_number }}</span>
+      </div>
+      <div class="profile-items">
+        <label>User E-mail:</label>
+        <span>{{ websiteSettingsData.user_email }}</span>
+      </div>
+      <div class="profile-items">
+        <label>User Description:</label>
+        <span>{{ websiteSettingsData.user_description }}</span>
+      </div>
+</div>
+</section>
+<!-- Stocks -->
+      <section class="stocksContent" id="stocksContent" ng-controller="stocksCntrl">
+        <div class="main-top">
+          <h1>Stocks</h1>
+ 
+         </div>
+ 
+        <section class="stocks">
+          <div class="stocks-list">
+            <h1>Stocks Table</h1>
+            <form class="form-design" id="stocksForm" ng-submit="submit_stocksForm()">
+              <div class="form-row">
+                  <label>Name:</label>
+                  <input type="text" ng-model="stocksData.name" required>
+              </div>
+              <div class="form-row">
+                  <label>Symbol:</label>
+                  <input type="text" ng-model="stocksData.symbol" required>
+              </div>
+              <div class="form-row">
+                  <label>Quantity:</label>
+                  <input type="text" ng-model="stocksData.quantity" required>
+              </div>
+              <div class="form-row">
+                <label>Profit:</label>
+                <input type="text" ng-model="stocksData.profit" required>
+              </div>
+              <div class="form-row">
+                  <label>Opening Price:</label>
+                  <input type="text" ng-model="stocksData.openingprice" required>
+              </div>
+              <div class="form-row">
+                  <label>Closing Price:</label>
+                  <input type="text" ng-model="stocksData.closingprice" required>
+              </div>
+              <div class="form-row">
+                  <label>Selling Date:</label>
+                  <input type="date" ng-model="stocksData.selling_date" required>
+              </div>
+              <div class="form-row">
+                <button class="submit" type="submit">Submit</button>
+              </div>
+          </form>
+        <div class="table-container">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Sl No.</th>
+                      <th>Name</th>
+                      <th>Symbol</th>
+                      <th>Quantity</th>
+                      <th>Profit</th>
+                      <th>Opening Price</th>
+                      <th>Closing Price</th>
+                      <th>Selling Date</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+              </thead>
+            <tbody>
+              <tr ng-repeat="stocks in stocksList">
+                  <td>
+                    <!-- {{ $index+1 }} -->
+                      <span ng-show="!stocks.editMode">{{ stocks.stock_id }}</span>
+                      <input type="text" ng-model="stocks.temp_stock_id" ng-show="stocks.editMode">
+                  </td>
+                  <td>
+                      <span ng-show="!stocks.editMode">{{ stocks.name }}</span>
+                      <input type="text" ng-model="stocks.temp_name" ng-show="stocks.editMode">
+                  </td>
+                  <td>
+                      <span ng-show="!stocks.editMode">{{ stocks.symbol }}</span>
+                      <input type="text" ng-model="stocks.temp_symbol" ng-show="stocks.editMode">
+                  </td>
+                  <td>
+                      <span ng-show="!stocks.editMode">{{ stocks.quantity }}</span>
+                      <input type="text" ng-model="stocks.temp_quantity" ng-show="stocks.editMode">
+                  </td>
+                  <td>
+                    <span ng-show="!stocks.editMode">{{ stocks.profit }}</span>
+                    <input type="text" ng-model="stocks.temp_profit" ng-show="stocks.editMode">
+                  </td>
+                  <td>
+                      <span ng-show="!stocks.editMode">{{ stocks.openingprice }}</span>
+                      <input type="text" ng-model="stocks.temp_openingprice" ng-show="stocks.editMode">
+                  </td>
+                  <td>
+                      <span ng-show="!stocks.editMode">{{ stocks.closingprice }}</span>
+                      <input type="text" ng-model="stocks.temp_closingprice" ng-show="stocks.editMode">
+                  </td>
+                  <td>
+                      <span ng-show="!stocks.editMode">{{ stocks.selling_date }}</span>
+                      <input type="date" ng-model="stocks.temp_selling_date" ng-show="stocks.editMode">
+                  </td>
+                  <td>
+                      <button ng-click="editStock(stocks)">Edit</button><br>
+                      <button ng-click="saveStock(stocks)" ng-show="stocks.editMode">Save</button><br>
+                      <button ng-click="cancelEditStock(stocks)" ng-show="stocks.editMode">Cancel</button>
+                  </td>
+                  <td>
+                      <button ng-click="deleteStock(stocks.stock_id)">Delete</button>
+                  </td>
+              </tr>
+          </tbody>
+          </table>
+          </div>
+          </div>
+        </section>
+      </section>
+  <!-- Currency -->
+      <section class="currencyContent" id="currencyContent" ng-controller="currencyCntrl">
+        <div class="main-top">
+          <h1>Currency</h1>
+        </div>
+
+        <section class="currency">
+          <div class="currency-list">
+            <h1>Currency Table</h1>
+            <form class="form-design" id="currencyForm()" ng-submit="submit_currencyForm()">
+              <div class="form-row">
+                  <label>Name:</label>
+                  <input type="text" ng-model="currencyData.name" required>
+              </div>
+              <div class="form-row">
+                  <label>Code:</label>
+                  <input type="text" ng-model="currencyData.code" required>
+              </div>
+              <div class="form-row">
+                  <label>Exchange Rate:</label>
+                  <input type="text" ng-model="currencyData.exchange_rate" required>
+              </div>
+              <div class="form-row">
+                  <label>Profit:</label>
+                  <input type="text" ng-model="currencyData.profit" required>
+              </div>
+              <div class="form-row">
+                  <label>Bought Price:</label>
+                  <input type="text" ng-model="currencyData.bought_price" required>
+              </div>
+              <div class="form-row">
+                  <label>Selling Price:</label>
+                  <input type="text" ng-model="currencyData.sell_price" required>
+              </div>
+              <div class="form-row">
+                <label>Selling Date:</label>
+                <input type="date" ng-model="currencyData.selling_date" required>
+            </div>
+              <div class="form-row">
+                  <button class="submit" type="submit" ng-click="submit_currencyForm()">Submit</button>
+              </div>
+          </form>
+          <div class="table-container">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Sl No.</th>
+                      <th>Name</th>
+                      <th>Code</th>
+                      <th>Exchange Rate</th>
+                      <th>Profit</th>
+                      <th>Bought Price</th>
+                      <th>Sell Price</th>
+                      <th>Selling Date</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="currency in currencyList">
+                    <td>
+                      <!-- {{ $index+1 }} -->
+                        <span ng-show="!currency.editMode">{{ currency.currency_id }}</span>
+                        <input type="text" ng-model="currency.temp_currency_id" ng-show="currency.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!currency.editMode">{{ currency.name }}</span>
+                        <input type="text" ng-model="currency.temp_name" ng-show="currency.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!currency.editMode">{{ currency.code }}</span>
+                        <input type="text" ng-model="currency.temp_code" ng-show="currency.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!currency.editMode">{{ currency.exchange_rate }}</span>
+                        <input type="text" ng-model="currency.temp_exchange_rate" ng-show="currency.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!currency.editMode">{{ currency.profit }}</span>
+                        <input type="text" ng-model="currency.temp_profit" ng-show="currency.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!currency.editMode">{{ currency.bought_price }}</span>
+                        <input type="text" ng-model="currency.temp_bought_price" ng-show="currency.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!currency.editMode">{{ currency.sell_price }}</span>
+                        <input type="text" ng-model="currency.temp_sell_price" ng-show="currency.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!currency.editMode">{{ currency.selling_date }}</span>
+                        <input type="date" ng-model="currency.temp_selling_date" ng-show="currency.editMode">
+                    </td>
+                    <td>
+                        <button ng-click="editCurrency(currency)">Edit</button>
+                        <button ng-click="saveCurrency(currency)" ng-show="currency.editMode">Save</button>
+                        <button ng-click="cancelEditCurrency(currency)" ng-show="currency.editMode">Cancel</button>
+                    </td>
+                    <td>
+                        <button ng-click="deleteCurrency(currency.currency_id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+            
+          </table>
+          </div>
+          </div>
+        </section>
+      </section>
+<!-- Commodity -->
+      <section class="commodityContent" id="commodityContent" ng-controller="commodityCntrl">
+        <div class="main-top">
+          <h1>Commodity</h1>
+        </div>
+
+        <section class="commodity">
+          <div class="commodity-list">
+            <h1>Commodity Table</h1>
+            <form class="form-design" id="commodityForm" ng-submit="submit_commodityForm()">
+              <div class="form-row">
+                  <label>Name:</label>
+                  <input type="text" ng-model="commodityData.name" required>
+              </div>
+              <div class="form-row">
+                  <label>Unit:</label>
+                  <input type="text" ng-model="commodityData.unit" required>
+              </div>
+              <div class="form-row">
+                  <label>Quantity:</label>
+                  <input type="text" ng-model="commodityData.quantity" required>
+              </div>
+              <div class="form-row">
+                <label>Profit:</label>
+                <input type="text" ng-model="commodityData.profit" required>
+              </div>
+              <div class="form-row">
+                  <label>Opening Price:</label>
+                  <input type="text" ng-model="commodityData.opening_price" required>
+              </div>
+              <div class="form-row">
+                  <label>Closing Price:</label>
+                  <input type="text" ng-model="commodityData.closing_price" required>
+              </div>
+              <div class="form-row">
+                  <button class="submit" type="submit" ng-click="submit_commodityForm()">Submit</button>
+              </div>
+          </form>
+          <div class="table-container">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Sl No.</th>
+                      <th>Name</th>
+                      <th>Unit</th>
+                      <th>Quantity</th>
+                      <th>Profit</th>
+                      <th>Opening Price</th>
+                      <th>Closing Price</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="commodity in commodityList">
+                    <td>
+                      <!-- {{ $index+1 }} -->
+                        <span ng-show="!commodity.editMode">{{ commodity.commodity_id }}</span>
+                        <input type="text" ng-model="commodity.temp_commodity_id" ng-show="commodity.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!commodity.editMode">{{ commodity.name }}</span>
+                        <input type="text" ng-model="commodity.temp_name" ng-show="commodity.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!commodity.editMode">{{ commodity.unit }}</span>
+                        <input type="text" ng-model="commodity.temp_unit" ng-show="commodity.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!commodity.editMode">{{ commodity.quantity }}</span>
+                        <input type="text" ng-model="commodity.temp_quantity" ng-show="commodity.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!commodity.editMode">{{ commodity.profit }}</span>
+                        <input type="text" ng-model="commodity.temp_profit" ng-show="commodity.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!commodity.editMode">{{ commodity.opening_price }}</span>
+                        <input type="text" ng-model="commodity.temp_opening_price" ng-show="commodity.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!commodity.editMode">{{ commodity.closing_price }}</span>
+                        <input type="text" ng-model="commodity.temp_closing_price" ng-show="commodity.editMode">
+                    </td>
+                    <td>
+                        <button ng-click="editCommodity(commodity)">Edit</button>
+                        <button ng-click="saveCommodity(commodity)" ng-show="commodity.editMode">Save</button>
+                        <button ng-click="cancelEditCommodity(commodity)" ng-show="commodity.editMode">Cancel</button>
+                    </td>
+                    <td>
+                        <button ng-click="deleteCommodity(commodity.commodity_id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+            
+          </table>
+          </div>
+          </div>
+        </section>
+      </section>
+<!-- Shylock -->
+      <section class="shylockContent" id="shylockContent" ng-controller="shylockCntrl">
+        <div class="main-top">
+          <h1>Shylock</h1>
+        </div>
+
+        <section class="shylock">
+          <div class="shylock-list">
+            <h1>Shylock Table</h1>
+            <form class="form-design" id="shylockForm" ng-submit="submit_shylockForm()">
+              <div class="form-row">
+                  <label>Borrower Name:</label>
+                  <input type="text" ng-model="shylockData.borrower_name" required>
+              </div>
+              <div class="form-row">
+                  <label>Phone:</label>
+                  <input type="text" ng-model="shylockData.phone_number" required>
+              </div>
+              <div class="form-row">
+                  <label>Lent Amount:</label>
+                  <input type="text" ng-model="shylockData.lent_amount" required>
+              </div>
+              <div class="form-row">
+                  <label>Returned Amount:</label>
+                  <input type="text" ng-model="shylockData.returned_amount" required>
+              </div>
+              <div class="form-row">
+                  <label>Balance Amount:</label>
+                  <input type="text" ng-model="shylockData.balance_amount" required>
+              </div>
+              <div class="form-row">
+                  <label>Interest Rate:</label>
+                  <input type="text" ng-model="shylockData.interest_rate" required>
+              </div>
+              <div class="form-row">
+                <label>Start Date:</label>
+                <input type="date" ng-model="shylockData.start_date" required>
+            </div>
+            <div class="form-row">
+              <label>End Date:</label>
+              <input type="date" ng-model="shylockData.end_date" required>
+          </div>
+          <div class="form-row">
+            <label>Status:</label>
+            <input type="text" ng-model="shylockData.status" required>
+            <!-- <input type="radio" ng-model="shylockData.status" required> -->
+        </div>
+               
+              <div class="form-row">
+                  <button class="submit" type="submit" ng-click="submit_shylockForm()">Submit</button>
+              </div>
+          </form>
+          <div class="table-container">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Sl No.</th>
+                      <th>Borrower Name</th>
+                      <th>Phone</th>
+                      <th>Lent Amount</th>
+                      <th>Returned Amount</th>
+                      <th>Balance Amount</th>
+                      <th>Interest Rate</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="shylock in shylockList">
+                    <td>
+                      <!-- {{ $index+1 }} -->
+                        <span ng-show="!shylock.editMode">{{ shylock.shylock_id }}</span>
+                        <input type="text" ng-model="shylock.temp_shylock_id" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!shylock.editMode">{{ shylock.borrower_name }}</span>
+                        <input type="text" ng-model="shylock.temp_borrower_name" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!shylock.editMode">{{ shylock.phone_number }}</span>
+                        <input type="text" ng-model="shylock.temp_phone_number" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!shylock.editMode">{{ shylock.lent_amount }}</span>
+                        <input type="text" ng-model="shylock.temp_lent_amount" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!shylock.editMode">{{ shylock.returned_amount }}</span>
+                        <input type="text" ng-model="shylock.temp_returned_amount" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!shylock.editMode">{{ shylock.balance_amount }}</span>
+                        <input type="text" ng-model="shylock.temp_balance_amount" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!shylock.editMode">{{ shylock.interest_rate }}</span>
+                        <input type="text" ng-model="shylock.temp_interest_rate" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!shylock.editMode">{{ shylock.start_date }}</span>
+                        <input type="date" ng-model="shylock.temp_start_date" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!shylock.editMode">{{ shylock.end_date }}</span>
+                        <input type="date" ng-model="shylock.temp_end_date" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!shylock.editMode">{{ shylock.status }}</span>
+                        <input type="text" ng-model="shylock.temp_status" ng-show="shylock.editMode">
+                    </td>
+                    <td>
+                        <button ng-click="editShylock(shylock)">Edit</button>
+                        <button ng-click="saveShylock(shylock)" ng-show="shylock.editMode">Save</button>
+                        <button ng-click="cancelEditShylock(shylock)" ng-show="shylock.editMode">Cancel</button>
+                    </td>
+                    <td>
+                        <button ng-click="deleteShylock(shylock.shylock_id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+            
+          </table>
+        </div>
+          </div>
+        </section>
+      </section>
+<!-- Loan -->
+      <section class="loanContent" id="loanContent" ng-controller="loanCntrl">
+        <div class="main-top">
+          <h1>Loan</h1>
+        </div>
+
+        <section class="loan">
+          <div class="loan-list">
+            <h1>Loan Table</h1>
+            <form class="form-design" id="loanForm" ng-submit="submit_loanForm()">
+              <div class="form-row">
+                  <label>Source:</label>
+                  <input type="text" ng-model="loanData.source" required>
+              </div>
+              <div class="form-row">
+                  <label>Type:</label>
+                  <input type="text" ng-model="loanData.type" required>
+              </div>
+              <div class="form-row">
+                  <label>Principal Amount:</label>
+                  <input type="text" ng-model="loanData.principal_amount" required>
+              </div>
+              <div class="form-row">
+                  <label>Installments:</label>
+                  <input type="text" ng-model="loanData.installments" required>
+              </div>
+              <div class="form-row">
+                  <label>Balance:</label>
+                  <input type="text" ng-model="loanData.balance" required>
+              </div>
+              <div class="form-row">
+                  <label>Term:</label>
+                  <input type="text" ng-model="loanData.term" required>
+              </div>
+              <div class="form-row">
+                <label>Start Date:</label>
+                <input type="date" ng-model="loanData.start_date" required>
+              </div>
+              <div class="form-row">
+                <label>End Date:</label>
+                <input type="date" ng-model="loanData.end_date" required>
+              </div>
+              <div  class="form-row">
+                  <button class="submit" type="submit" ng-click="submit_loanForm()">Submit</button>
+              </div>
+          </form>
+          <div class="table-container">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Sl No.</th>
+                      <th>Source</th>
+                      <th>Type</th>
+                      <th>Principal Amount</th>
+                      <th>Installments</th>
+                      <th>Balance</th>
+                      <th>Term</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="loan in loanList">
+                    <td>
+                      <!-- {{ $index+1 }} -->
+                        <span ng-show="!loan.editMode">{{ loan.loan_id }}</span>
+                        <input type="text" ng-model="loan.temp_loan_id" ng-show="loan.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!loan.editMode">{{ loan.source }}</span>
+                        <input type="text" ng-model="loan.temp_source" ng-show="loan.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!loan.editMode">{{ loan.type }}</span>
+                        <input type="text" ng-model="loan.temp_type" ng-show="loan.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!loan.editMode">{{ loan.principal_amount }}</span>
+                        <input type="text" ng-model="loan.temp_principal_amount" ng-show="loan.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!loan.editMode">{{ loan.installments }}</span>
+                        <input type="text" ng-model="loan.temp_installments" ng-show="loan.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!loan.editMode">{{ loan.balance }}</span>
+                        <input type="text" ng-model="loan.temp_balance" ng-show="loan.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!loan.editMode">{{ loan.term }}</span>
+                        <input type="text" ng-model="loan.temp_term" ng-show="loan.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!loan.editMode">{{ loan.start_date }}</span>
+                        <input type="date" ng-model="loan.temp_start_date" ng-show="loan.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!loan.editMode">{{ loan.end_date }}</span>
+                        <input type="date" ng-model="loan.temp_end_date" ng-show="loan.editMode">
+                    </td>
+                    <td>
+                        <button ng-click="editLoan(loan)">Edit</button>
+                        <button ng-click="saveLoan(loan)" ng-show="loan.editMode">Save</button>
+                        <button ng-click="cancelEditLoan(loan)" ng-show="loan.editMode">Cancel</button>
+                    </td>
+                    <td>
+                        <button ng-click="deleteLoan(loan.loan_id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+          </div>
+          </div>
+        </section>
+      </section>
+<!-- Fixed Assets -->
+      <section class="fixedContent" id="fixedContent" ng-controller="fixedCntrl">
+        <div class="main-top">
+          <h1>Fixed Assets</h1>
+        </div>
+
+        <section class="fixed">
+          <div class="fixed-list">
+            <h1>Fixed Assets Table</h1>
+            <form class="form-design" id="fixedForm" ng-submit="submit_fixedForm()">
+              <div class="form-row">
+                  <label>Property Name:</label>
+                  <input type="text" ng-model="fixedData.property_name" required>
+              </div>
+              <div class="form-row">
+                  <label>Type:</label>
+                  <input type="text" ng-model="fixedData.type" required>
+              </div>
+              <div class="form-row">
+                  <label>Date Acquired:</label>
+                  <input type="date" ng-model="fixedData.date_acquired" required>
+              </div>
+              <div class="form-row">
+                  <label>Purchase Price:</label>
+                  <input type="text" ng-model="fixedData.purchase_price" required>
+              </div>
+              <div class="form-row">
+                  <label>Selling Price:</label>
+                  <input type="text" ng-model="fixedData.selling_price" required>
+              </div>
+              <div class="form-row">
+                  <label>Profit:</label>
+                  <input type="text" ng-model="fixedData.profit" required>
+              </div>
+              <div class="form-row">
+                  <button class="submit" type="submit" ng-click="submit_fixedForm()">Submit</button>
+              </div>
+          </form>
+          <div class="table-container">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Sl No.</th>
+                      <th>Property Name</th>
+                      <th>Type</th>
+                      <th>Date Acquired</th>
+                      <th>Purchase Price</th>
+                      <th>Selling Price</th>
+                      <th>Profit</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="fixed in fixedList">
+                    <td>
+                      <!-- {{ $index+1 }} -->
+                        <span ng-show="!fixed.editMode">{{ fixed.fixed_id }}</span>
+                        <input type="text" ng-model="fixed.temp_fixed_id" ng-show="fixed.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!fixed.editMode">{{ fixed.property_name }}</span>
+                        <input type="text" ng-model="fixed.temp_property_name" ng-show="fixed.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!fixed.editMode">{{ fixed.type }}</span>
+                        <input type="text" ng-model="fixed.temp_type" ng-show="fixed.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!fixed.editMode">{{ fixed.date_acquired }}</span>
+                        <input type="date" ng-model="fixed.temp_date_acquired" ng-show="fixed.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!fixed.editMode">{{ fixed.purchase_price }}</span>
+                        <input type="text" ng-model="fixed.temp_purchase_price" ng-show="fixed.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!fixed.editMode">{{ fixed.selling_price }}</span>
+                        <input type="text" ng-model="fixed.temp_selling_price" ng-show="fixed.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!fixed.editMode">{{ fixed.profit }}</span>
+                        <input type="text" ng-model="fixed.temp_profit" ng-show="fixed.editMode">
+                    </td>
+                    <td>
+                        <button ng-click="editFixed(fixed)">Edit</button>
+                        <button ng-click="saveFixed(fixed)" ng-show="fixed.editMode">Save</button>
+                        <button ng-click="cancelEditFixed(fixed)" ng-show="fixed.editMode">Cancel</button>
+                    </td>
+                    <td>
+                        <button ng-click="deleteFixed(fixed.fixed_id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+            
+          </table>
+          </div>
+          </div>
+        </section>
+      </section>
+<!-- Liquid assets -->
+      <section class="liquidContent" id="liquidContent" ng-controller="liquidCntrl">
+        <div class="main-top">
+          <h1>Liquid Assets</h1>
+        </div>
+
+        <section class="liquid">
+          <div class="liquid-list">
+            <h1>Liquid Assets Table</h1>
+            <form class="form-design" id="liquidForm"  ng-submit="submit_liquidForm()">
+              <div class="form-row">
+                  <label>Name:</label>
+                  <input type="text" ng-model="liquidData.name" required>
+              </div>
+              <div class="form-row">
+                  <label>Quantity:</label>
+                  <input type="text" ng-model="liquidData.quantity" required>
+              </div>
+              <div class="form-row">
+                <label>Date Acquired:</label>
+                <input type="date" ng-model="liquidData.date_acquired" required>
+            </div>
+              <div class="form-row">
+                  <label>Purchase Price:</label>
+                  <input type="text" ng-model="liquidData.purchase_price" required>
+              </div>
+              <div class="form-row">
+                  <label>Selling Price:</label>
+                  <input type="text" ng-model="liquidData.selling_price" required>
+              </div>
+              <div class="form-row">
+                  <label>Profit:</label>
+                  <input type="text" ng-model="liquidData.profit" required>
+              </div>
+              <div class="form-row">
+                  <button class="submit" type="submit" ng-click="submit_liquidForm()">Submit</button>
+              </div>
+          </form>
+          <div class="table-container">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Sl No.</th>
+                      <th>Name</th>
+                      <th>Quantity</th>
+                      <th>Date Acquired</th>
+                      <th>Purchase Price</th>
+                      <th>Selling Price</th>
+                      <th>Profit</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="liquid in liquidList">
+                    <td>
+                      <!-- {{ $index+1 }} --> 
+                      <span ng-show="!liquid.editMode">{{ liquid.liquid_id }}</span>
+                        <input type="text" ng-model="liquid.temp_liquid_id" ng-show="liquid.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!liquid.editMode">{{ liquid.name }}</span>
+                        <input type="text" ng-model="liquid.temp_name" ng-show="liquid.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!liquid.editMode">{{ liquid.quantity }}</span>
+                        <input type="text" ng-model="liquid.temp_quantity" ng-show="liquid.editMode">
+                    </td>
+                    <td>
+                      <span ng-show="!liquid.editMode">{{ liquid.date_acquired }}</span>
+                      <input type="date" ng-model="liquid.temp_date_acquired" ng-show="liquid.editMode">
+                  </td>
+                    <td>
+                        <span ng-show="!liquid.editMode">{{ liquid.purchase_price }}</span>
+                        <input type="text" ng-model="liquid.temp_purchase_price" ng-show="liquid.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!liquid.editMode">{{ liquid.selling_price }}</span>
+                        <input type="text" ng-model="liquid.temp_selling_price" ng-show="liquid.editMode">
+                    </td>
+                    <td>
+                        <span ng-show="!liquid.editMode">{{ liquid.profit }}</span>
+                        <input type="text" ng-model="liquid.temp_profit" ng-show="liquid.editMode">
+                    </td>
+                    <td>
+                        <button ng-click="editLiquid(liquid)">Edit</button>
+                        <button ng-click="saveLiquid(liquid)" ng-show="liquid.editMode">Save</button>
+                        <button ng-click="cancelEditLiquid(liquid)" ng-show="liquid.editMode">Cancel</button>
+                    </td>
+                    <td>
+                        <button ng-click="deleteLiquid(liquid.liquid_id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+          </div>
+          </div>
+        </section>
+      </section>
+
+        <!-- settings -->
+
+        <section class="settingsContent" id="settingsContent" ng-controller="settingsCntrl">
+        <div class="main-top"></div>
+
+        <section class="settings">
+          <div class="settings-list">
+            <h1>Settings</h1>
+            <form class="form-design" id="websiteSettingsForm" ng-submit="submit_websiteSettingsForm">
+              <div class="form-row">
+                <label>User Name:</label>
+                <input type="text" ng-model="websiteSettingsData.user_name" required placeholder="">
+              </div>
+              <div class="form-row">
+                <label>User Password:</label>
+                <input type="password" ng-model="websiteSettingsData.user_password" required placeholder="">
+              </div>
+              <div class="form-row">
+                <label>User Phone:</label>
+                <input type="text" ng-model="websiteSettingsData.user_number" required placeholder="">
+              </div>
+              <div class="form-row">
+                <label>User E-mail:</label>
+                <input type="email" ng-model="websiteSettingsData.user_email" required placeholder="">
+              </div>
+              <div class="form-row">
+                <label>User Description:</label>
+                <input type="text" ng-model="websiteSettingsData.user_description" required placeholder="">
+              </div>
+              <div class="form-row">
+                <button class="submit" type="submit" ng-click="submit_websiteSettingsForm()">Submit</button>
+              </div>
+            </form>
+          </div>
+        </section>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- script code     -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        // Call displayUsername function when the page loads
+        window.onload = getUsername();
+
+      //sidebar
+      $(document).ready(function(){
+        // Hide all sub-menus by default
+        $('.sub-menu').hide();
+
+        // Show sub-menu on hover
+        $('.sub-btn').hover(function() {
+          $(this).next('.sub-menu').slideDown();
+        }
+        //, 
+        //function() {
+          //$(this).next('.sub-menu').slideUp();}
+      );
+
+        $(document).click(function(e) {
+          if (!$(e.target).closest('.sub-btn').length) {
+            $('.sub-menu').slideUp();
+          }
+        });
+
+        // Toggle sub-menu on click
+        $('.sub-btn').click(function() {
+          $(this).next('.sub-menu').slideToggle();
+        });
+      }); 
+
+      $(document).ready(function(){
+        // Function to show content based on ID
+        function showContent(contentId) {
+          // Hide all content divisions
+          var contents = $('main > section');
+          //contents.hide();
+          content.style.display = 'none'
+
+          // Show the selected content division
+          var selectedContent = $('#' + contentId);
+          if (selectedContent.length > 0) {
+            selectedContent.show();
+          }
+        }
+
+        // Hide all sections except the first one initially
+        $('.container > section:not(:first)').hide();
+
+        // Toggle section on clicking the navigation links
+        $('nav a').click(function(e) {
+          e.preventDefault();
+          var target = $(this).attr('href');
+          $('.container > section').hide();
+          $(target).show();
+        });
+      });
+
+      function onResize() {
+        var element = document.getElementById('stocksContent');
+        if (element !== null) {
+            // Check if element has classList property before accessing it
+            if (element.classList !== undefined) {
+                // Access classList property
+                element.classList.add('stocksContent');
+            } else {
+                console.error('classList is not supported');
+            }
+        } else {
+            console.error('Element not found');
+        }
+    }
+
+    var app = angular.module('FinanceApp', []);
+
+  function openModal(modalId) {
+    $('#' + modalId + 'Modal').fadeIn();
+    $('.container').not('#' + modalId + 'Modal');
+  }
+
+  function closeModal() {
+    $('.overlay').fadeOut();
+    $('.container').css('filter', 'none');
+  }
+  
+  $(document).ready(function() {
+    function openModal(modalId) {
+      $('#' + modalId + 'Modal').fadeIn();
+    }
+
+    function closeModal() {
+      $('.overlay').fadeOut();
+    }
+   
+  
+      // Function to handle signup form submission
+      $("#signupForm").submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
+        var formData = $(this).serialize(); // Serialize form data
+        $.ajax({
+          url: "login_signup.php", // PHP script handling signup
+          type: "POST",
+          data: formData, // Form data
+          success: function(response) {
+            alert(response); // Show success message or redirect user
+            closeModal();
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText); // Log error message
+            alert("Error occurred. Please try again."); // Show error message to user
+          }
+        });
+      });
+  
+      // Function to handle login form submission
+      $("#loginForm").submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
+        var formData = $(this).serialize(); // Serialize form data
+        $.ajax({
+          url: "login_signup.php", // PHP script handling login
+          type: "POST",
+          data: formData, // Form data
+          success: function(response) {
+            alert(response); // Show success message or redirect user
+            closeModal();
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText); // Log error message
+            alert("Error occurred. Please try again."); // Show error message to user
+          }
+        });
+      });
+  
+      // Click event for login link in signup form
+      $("#signupModal").on("click", "a[href='#LoginContent']", function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        closeModal(); // Close signup modal
+        openModal("login"); // Open login modal
+      });
+  
+      // Click event for signup link in login form
+      $("#loginModal").on("click", "a[href='#SignupContent']", function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        closeModal(); // Close login modal
+        openModal("signup"); // Open signup modal
+      });
+    });
+
+
+    function displayUsername() {
+        var username = sessionStorage.getItem("username");
+        if (username) {
+            document.getElementById("usernameSpan").textContent = username;
+        }
+      }
+
+      function login() {
+        var xhr = new XMLHttpRequest();
+        var form = document.getElementById("loginForm");
+        var formData = new FormData(form);
+    
+        xhr.onreadystatechange = function() {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                if (this.responseText === 'success') {
+                    // Fetch and display username after successful login
+                    getUsername();
+                } else {
+                    // Display error message if login fails
+                    document.getElementById("usernameSpan").innerHTML = this.responseText;
+                }
+            }
+        };
+    
+        xhr.open("POST", "login_signup.php", true);
+        xhr.send(formData);
+    }
+    
+    function getUsername() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+          if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+              var username = this.responseText.trim();
+              if (username !== '') {
+                  // Display the username
+                  document.getElementById("usernameSpan").textContent = username;
+              } else {
+                  // Clear the username if it's empty
+                  document.getElementById("usernameSpan").textContent = "";
+              }
+          }
+      };
+      xhr.open("GET", "get_username.php", true);
+      xhr.send();
+  }
+  
+      function logout() {
+        var xhr = new XMLHttpRequest();
+    
+        xhr.onreadystatechange = function() {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                // Clear the username from session storage
+                sessionStorage.removeItem("username");
+  
+                // Clear the username after successful logout
+                document.getElementById("usernameSpan").textContent = "";
+  
+                // Redirect to the login page or any other page after logout
+                window.location.href = "index.html";
+            }
+        };
+    
+        xhr.open("GET", "logout.php", true);
+        xhr.send();
+      }
+  
+      //users
+  app.controller('myCtrl', function($scope, $http) {
+    
+    // Initialize login and signup data objects
+    $scope.loginData = {};
+    $scope.signupData = {};
+  
+    // Function to handle login
+    $scope.login = function() {
+      // Send login data to login.php for validation
+      $http.post('login.php', $scope.loginData)
+        .then(function(response) {
+          // Handle response from PHP backend
+          if (response.data === "success") {
+            // Login successful, perform actions such as redirecting to dashboard
+            console.log("Login successful");
+          } else {
+            // Login failed, display error message
+            console.log("Login failed. Invalid credentials.");
+          }
+        }, function(error) {
+          // Handle error
+          console.log(error);
+          // Optionally, display an error message to the user
+        });
+    };
+  
+    // Function to handle signup
+    $scope.signup = function() {
+      // Send signup data to signup.php to create new user
+      $http.post('signup.php', $scope.signupData)
+        .then(function(response) {
+          // Handle response from PHP backend
+          if (response.data === "success") {
+            // Signup successful, perform actions such as redirecting to dashboard
+            console.log("Signup successful");
+          } else {
+            // Signup failed, display error message
+            console.log("Signup failed. Please try again.");
+          }
+        }, function(error) {
+          // Handle error
+          console.log(error);
+          // Optionally, display an error message to the user
+        });
+    };
+  });
+
+
+// Function to fetch data via AJAX and update HTML element
+function fetchData(url, elementId) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onload = function() {
+      if (xhr.status === 200) {
+          document.getElementById(elementId).innerHTML = xhr.responseText;
+      }
+  };
+  xhr.send();
+}
+
+// Function to fetch total expense
+function fetchTotalExpense() {
+  fetchData('total_expense.php', 'total_expense');
+}
+
+// Function to fetch total income
+function fetchTotalIncome() {
+  fetchData('total_income.php', 'total_income');
+}
+
+// Function to fetch total profit
+function fetchTotalProfit() {
+  fetchData('total_profit.php', 'total_profit');
+}
+
+// Function to fetch total savings
+function fetchTotalSavings() {
+  fetchData('total_savings.php', 'total_savings');
+}
+
+// Function to fetch total expense
+function fetchTotalTradingExpense() {
+  fetchData('total_trading_expense.php', 'total_trading_expense');
+}
+
+// Function to fetch total income
+function fetchTotalTradingIncome() {
+  fetchData('total_trading_income.php', 'total_trading_income');
+}
+
+// Function to fetch total profit
+function fetchTotalTradingProfit() {
+  fetchData('total_trading_profit.php', 'total_trading_profit');
+}
+
+// Function to fetch total savings
+function fetchTotalTradingSavings() {
+  fetchData('total_trading_savings.php', 'total_trading_savings');
+}
+
+// Function to fetch total expense
+function fetchTotalAssetsExpense() {
+  fetchData('total_assets_expense.php', 'total_assets_expense');
+}
+
+// Function to fetch total income
+function fetchTotalAssetsIncome() {
+  fetchData('total_assets_income.php', 'total_assets_income');
+}
+
+// Function to fetch total profit
+function fetchTotalAssetsProfit() {
+  fetchData('total_assets_profit.php', 'total_assets_profit');
+}
+
+// Function to fetch total savings
+function fetchTotalAssetsSavings() {
+  fetchData('total_assets_savings.php', 'total_assets_savings');
+}
+
+// Function to fetch total trading data
+function fetchTotalTradingData() {
+  fetchData('total.php', 'total_trading_data');
+}
+
+// Function to fetch total assets data
+function fetchTotalAssetsData() {
+  fetchData('total.php', 'total_assets_data');
+}
+
+// Call the functions to fetch and display values on page load
+window.onload = function() {
+  fetchTotalTradingData();
+  fetchTotalAssetsData();
+  fetchTotalExpense();
+  fetchTotalIncome();
+  fetchTotalProfit();
+  fetchTotalSavings();
+  fetchTotalTradingExpense();
+  fetchTotalTradingIncome();
+  fetchTotalTradingProfit();
+  fetchTotalTradingSavings();
+  fetchTotalAssetsExpense();
+  fetchTotalAssetsIncome();
+  fetchTotalAssetsProfit();
+  fetchTotalAssetsSavings();
+};
+
+
+// Data for the histogram
+// Fetch data using AJAX
+fetch('fetch_data.php')
+.then(response => response.json())
+.then(data => {
+    // Extract borrower names and lent amounts
+    var borrowerNames = data.map(item => item.borrower_name);
+    var lentAmounts = data.map(item => item.lent_amount);
+
+    // Prepare data for the histogram
+    var dataset = {
+        labels: borrowerNames,
+        datasets: [{
+            label: 'Lent Amount',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            data: lentAmounts
+        }]
+    };
+
+    // Configuration for the histogram
+    var config = {
+        type: 'bar',
+        data: dataset,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Lent Amount'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Borrower Names'
+                    }
+                }
+            }
+        }
+    };
+
+    // Create the histogram
+    var myChart = new Chart(
+        document.getElementById('lentAmountChart'),
+        config
+    );
+})
+.catch(error => console.error('Error fetching data:', error));
+
+
+
+//loan table
+// Fetch data using AJAX
+fetch('fetch_loan_data.php')
+    .then(response => response.json())
+    .then(data => {
+        // Prepare data for the line graph
+        var dataset = {
+            labels: data.map(item => item.start_date + " (" + item.source + ")"), // Concatenating date with source
+            datasets: [{
+                label: 'Loan Balance',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                data: data.map(item => item.balance)
+            }]
+        };
+
+        // Configuration for the line graph
+        var config = {
+            type: 'line',
+            data: dataset,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Loan Balance'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Start-Date (Source)'
+                        }
+                    }
+                }
+            }
+        };
+
+        // Create the line graph
+        var myChart = new Chart(
+            document.getElementById('loanBalanceChart'),
+            config
+        );
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+
+
+
+
+// settings
+app.controller('settingsCntrl', function($scope, $http) {
+  $scope.websiteSettingsData = {}; // Object to store form data
+
+  // Function to fetch website settings
+  $scope.fetchWebsiteSettings = function() {
+      $http.get('website_settings.php')
+          .then(function(response) {
+              $scope.websiteSettingsData = response.data;
+          })
+          .catch(function(error) {
+              console.error('Error fetching website settings:', error);
+          });
+  };
+
+  // Function to submit website settings
+  $scope.submit_websiteSettingsForm = function() {
+      $http.post('website_settings.php', $scope.websiteSettingsData)
+          .then(function(response) {
+              console.log('Website settings updated successfully');
+              $scope.websiteSettingsData = {}; // Clear form fields
+          })
+          .catch(function(error) {
+              console.error('Error updating website settings:', error);
+          });
+  };
+
+  // Call the fetchWebsiteSettings function initially to populate the form
+  $scope.fetchWebsiteSettings();
+});
+
+// Stocks App
+app.controller('stocksCntrl', function($scope, $http) {
+  $scope.stocksList = []; // Array to store fetched data items
+  $scope.stocksData = {}; // Object to store form data item
+
+  // Function to fetch items from database
+  $scope.fetchData = function() {
+      $http.get('stocks.php?action=read').then(function(response) {
+          $scope.stocksList = response.data;
+      });
+  };
+
+  // Function to add a new item
+   $scope.submit_stocksForm = function() {
+      $scope.stocksList.push(angular.copy($scope.stocksData));
+      $scope.saveFormDataToDatabase($scope.stocksData);
+      $scope.stocksData = {}; // Clear form fields
+  };
+
+  // Function to save form data to the database
+  $scope.saveFormDataToDatabase = function(data) {
+      $http.post('stocks.php?action=create', $scope.stocksData).then(function(response) {
+          $scope.fetchData();
+          $scope.stocksData = {}; // Clear form fields
+      });
+  };
+
+  // Function to edit an item
+  $scope.editStock = function(stock) {
+      stock.editMode = true;
+      stock.temp_stock_id = stock.stock_id;
+      stock.temp_name = stock.name;
+      stock.temp_symbol = stock.symbol;
+      stock.temp_quantity = stock.quantity;
+      stock.temp_profit = stock.profit;
+      stock.temp_openingprice = stock.openingprice;
+      stock.temp_closingprice = stock.closingprice;
+      stock.temp_selling_date = new Date(stock.selling_date); // Convert string to Date object
+  };
+
+  // Function to save edited item
+  $scope.saveStock = function(stock) {
+      stock.editMode = false;
+      // Send edited data to PHP backend to update in MySQL database
+      $http.post('stocks.php?action=update', stock).then(function(response) {
+          $scope.fetchData();
+      });
+  };
+
+    // Function to cancel editing
+    $scope.cancelEditStock = function(stock) {
+      stock.editMode = false;
+  };
+
+  // Function to delete a stock
+$scope.deleteStock= function(stock_id) {
+  console.log('Deleting stock with ID:', stock_id);
+  // Send request to the PHP backend to delete the item from the MySQL database
+  $http.post('stocks.php?action=delete', { stock_id: stock_id }).then(function(response) {
+      $scope.fetchData();
+  });
+};
+  // Call the fetchData function initially to populate the table
+  $scope.fetchData();
+});
+
+// Currency App
+app.controller('currencyCntrl', function($scope, $http) {
+  $scope.currencyList = []; // Array to store fetched data items
+  $scope.currencyData = {}; // Object to store form data item
+
+  // Function to fetch items from database
+  $scope.fetchData = function() {
+      $http.get('currency.php?action=read').then(function(response) {
+          $scope.currencyList = response.data;
+      });
+  };
+
+  // Function to add a new item
+  $scope.submit_currencyForm = function() {
+      $scope.currencyList.push(angular.copy($scope.currencyData));
+      $scope.saveFormDataToDatabase($scope.currencyData);
+      $scope.currencyData = {}; // Clear form fields
+  };
+
+  // Function to save form data to the database
+  $scope.saveFormDataToDatabase = function(data) {
+      // Send data to PHP backend to save in MySQL database
+      $http.post('currency.php?action=create', $scope.currencyData).then(function(response) {
+          $scope.fetchData();
+          $scope.currencyData = {};
+      });
+  };
+
+  // Function to edit an item
+  $scope.editCurrency = function(currency) {
+      currency.editMode = true;
+      currency.temp_currency_id = currency.currency_id;
+      currency.temp_name = currency.name;
+      currency.temp_code = currency.code;
+      currency.temp_exchange_rate = currency.exchange_rate;
+      currency.temp_profit = currency.profit;
+      currency.temp_bought_price = currency.bought_price;
+      currency.temp_sell_price = currency.sell_price;
+      currency.temp_selling_date = new Date(currency.selling_date); // Convert string to Date object
+  };
+
+  // Function to save edited item
+  $scope.saveCurrency = function(currency) {
+      currency.editMode = false;
+      // Send edited data to PHP backend to update in MySQL database
+      $http.post('currency.php?action=update', currency).then(function(response) {
+          $scope.fetchData();
+      });
+  };
+
+  // Function to cancel editing
+  $scope.cancelEditCurrency = function(currency) {
+      currency.editMode = false;
+  };
+
+  // Function to delete an item
+  $scope.deleteCurrency = function(currency_id) {
+    console.log('Deleting currency with ID:', currency_id);
+      // Send request to PHP backend to delete item from MySQL database
+      $http.post('currency.php?action=delete', { currency_id: currency_id }).then(function(response) {
+          $scope.fetchData();
+      });
+  };
+
+  // Call the fetchData function initially to populate the table
+  $scope.fetchData();
+});
+
+
+// Commodity App
+app.controller('commodityCntrl', function($scope, $http) {
+  $scope.commodityList = []; // Array to store fetched data items
+  $scope.commodityData = {}; // Object to store form data item
+
+  // Function to fetch items from the database
+  $scope.fetchData = function() {
+      $http.get('commodity.php?action=read').then(function(response) {
+          $scope.commodityList = response.data;
+      });
+  };
+
+  // Function to add a new item
+  $scope.submit_commodityForm = function() {
+      $scope.commodityList.push(angular.copy($scope.commodityData));
+      $scope.saveFormDataToDatabase($scope.commodityData);
+      $scope.commodityData = {}; // Clear form fields
+  };
+
+  // Function to save form data to the database
+  $scope.saveFormDataToDatabase = function(data) {
+      // Send data to the PHP backend to save in the MySQL database
+      $http.post('commodity.php?action=create', $scope.commodityData).then(function(response) {
+          $scope.fetchData();
+          $scope.commodityData = {};
+      });
+  };
+
+  // Function to edit an item
+  $scope.editCommodity = function(commodity) {
+      commodity.editMode = true;
+      commodity.temp_commodity_id = commodity.commodity_id;
+      commodity.temp_name = commodity.name;
+      commodity.temp_unit = commodity.unit;
+      commodity.temp_quantity = commodity.quantity;
+      commodity.temp_profit = commodity.profit;
+      commodity.temp_opening_price = commodity.opening_price;
+      commodity.temp_closing_price = commodity.closing_price;
+  };
+
+  // Function to save edited item
+  $scope.saveCommodity = function(commodity) {
+      commodity.editMode = false;
+      // Send edited data to the PHP backend to update in the MySQL database
+      $http.post('commodity.php?action=update', commodity).then(function(response) {
+          $scope.fetchData();
+      });
+  };
+
+  // Function to cancel editing
+  $scope.cancelEditCommodity = function(commodity) {
+      commodity.editMode = false;
+  };
+
+  // Function to delete an item
+  $scope.deleteCommodity = function(commodity_id) {
+    console.log('Deleting commodity with ID:', commodity_id);
+      // Send request to the PHP backend to delete the item from the MySQL database
+      $http.post('commodity.php?action=delete', { commodity_id: commodity_id }).then(function(response) {
+          $scope.fetchData();
+      });
+  };
+
+  // Call the fetchData function initially to populate the table
+  $scope.fetchData();
+});
+
+// Shylock App
+app.controller('shylockCntrl', function($scope, $http) {
+  $scope.shylockList = []; // Array to store fetched data items
+  $scope.shylockData = {}; // Object to store form data item
+
+  // Function to fetch items from database
+  $scope.fetchData = function() {
+      $http.get('shylock.php?action=read').then(function(response) {
+          $scope.shylockList = response.data;
+      });
+  };
+
+  // Function to add a new item
+   $scope.submit_shylockForm = function() {
+      $scope.shylockList.push(angular.copy($scope.shylockData));
+      $scope.saveFormDataToDatabase($scope.shylockData);
+      $scope.shylockData = {}; // Clear form fields
+  };
+
+  // Function to save form data to the database
+  $scope.saveFormDataToDatabase = function(data) {
+      $http.post('shylock.php?action=create', $scope.shylockData).then(function(response) {
+          $scope.fetchData();
+          $scope.shylockData = {}; // Clear form fields
+      });
+  };
+
+  // Function to edit an item
+  $scope.editShylock = function(shylock) {
+      shylock.editMode = true;
+      shylock.temp_shylock_id = shylock.shylock_id;
+      shylock.temp_borrower_name = shylock.borrower_name;
+      shylock.temp_phone_number = shylock.phone_number;
+      shylock.temp_lent_amount = shylock.lent_amount;
+      shylock.temp_returned_amount = shylock.returned_amount;
+      shylock.temp_balance_amount = shylock.balance_amount;
+      shylock.temp_interest_rate = shylock.interest_rate;
+      shylock.temp_start_date = new Date(shylock.start_date); // Convert string to Date object
+      shylock.temp_end_date = new Date(shylock.end_date); // Convert string to Date object
+      shylock.temp_status = shylock.status;
+  };
+
+  // Function to save edited item
+  $scope.saveShylock = function(shylock) {
+      shylock.editMode = false;
+      // Send edited data to PHP backend to update in MySQL database
+      $http.post('shylock.php?action=update', shylock).then(function(response) {
+          $scope.fetchData();
+      });
+  };
+
+    // Function to cancel editing
+    $scope.cancelEditShylock = function(shylock) {
+      shylock.editMode = false;
+  };
+
+  // Function to delete a shylock
+$scope.deleteShylock = function(shylock_id) {
+  console.log('Deleting shylock with ID:', shylock_id);
+  // Send request to the PHP backend to delete the item from the MySQL database
+  $http.post('shylock.php?action=delete', { shylock_id: shylock_id }).then(function(response) {
+      $scope.fetchData();
+  });
+};
+  // Call the fetchData function initially to populate the table
+  $scope.fetchData();
+});
+
+// Loan App
+app.controller('loanCntrl', function($scope, $http) {
+  $scope.loanList = []; // Array to store fetched data items
+  $scope.loanData = {}; // Object to store form data item
+
+  // Function to fetch items from database
+  $scope.fetchData = function() {
+      $http.get('loan.php?action=read').then(function(response) {
+          $scope.loanList = response.data;
+      });
+  };
+
+  // Function to add a new item
+   $scope.submit_loanForm = function() {
+      $scope.loanList.push(angular.copy($scope.loanData));
+      $scope.saveFormDataToDatabase($scope.loanData);
+      $scope.loanData = {}; // Clear form fields
+  };
+
+  // Function to save form data to the database
+  $scope.saveFormDataToDatabase = function(data) {
+      $http.post('loan.php?action=create', $scope.loanData).then(function(response) {
+          $scope.fetchData();
+          $scope.loanData = {}; // Clear form fields
+      });
+  };
+
+  // Function to edit an item
+  $scope.editLoan = function(loan) {
+      loan.editMode = true;
+      loan.temp_loan_id = loan.loan_id;
+      loan.temp_source = loan.source;
+      loan.temp_type = loan.type;
+      loan.temp_principal_amount = loan.principal_amount;
+      loan.temp_installments = loan.installments;
+      loan.temp_balance = loan.balance;
+      loan.temp_term = loan.term;
+      loan.temp_start_date = new Date(loan.start_date); // Convert string to Date object
+      loan.temp_end_date = new Date(loan.end_date); // Convert string to Date object
+  };
+
+  // Function to save edited item
+  $scope.saveLoan = function(loan) {
+      loan.editMode = false;
+      // Send edited data to PHP backend to update in MySQL database
+      $http.post('loan.php?action=update', loan).then(function(response) {
+          $scope.fetchData();
+      });
+  };
+
+    // Function to cancel editing
+    $scope.cancelEditLoan = function(loan) {
+      loan.editMode = false;
+  };
+
+  // Function to delete a stock
+$scope.deleteLoan = function(loan_id) {
+  console.log('Deleting loan with ID:', loan_id);
+  // Send request to the PHP backend to delete the item from the MySQL database
+  $http.post('loan.php?action=delete', { loan_id: loan_id }).then(function(response) {
+      $scope.fetchData();
+  });
+};
+  // Call the fetchData function initially to populate the table
+  $scope.fetchData();
+});
+
+  // fixed assets
+  app.controller('fixedCntrl', function($scope, $http) {
+    $scope.fixedList = []; // Array to store fetched data items
+    $scope.fixedData = {}; // Object to store form data item
+  
+    // Function to fetch items from database
+    $scope.fetchData = function() {
+        $http.get('fixed.php?action=read').then(function(response) {
+            $scope.fixedList = response.data;
+        });
+    };
+  
+    // Function to add a new item
+    $scope.submit_fixedForm = function() {
+        $scope.fixedList.push(angular.copy($scope.fixedData));
+        $scope.saveFormDataToDatabase($scope.fixedData);
+        $scope.fixedData = {}; // Clear form fields
+    };
+  
+    // Function to save form data to the database
+    $scope.saveFormDataToDatabase = function(data) {
+        // Send data to PHP backend to save in MySQL database
+        $http.post('fixed.php?action=create', $scope.fixedData).then(function() {
+            $scope.fetchData();
+            $scope.fixedData = {}; // Clear form fields
+        });
+    };
+  
+    // Function to edit an item
+    $scope.editFixed = function(fixed) {
+        fixed.editMode = true;
+        // Backup the original data in case of cancel
+        fixed.temp_fixed_id = fixed.fixed_id;
+        fixed.temp_property_name = fixed.property_name;
+        fixed.temp_type = fixed.type;
+        fixed.temp_date_acquired = fixed.date_acquired;
+        fixed.temp_purchase_price = fixed.purchase_price;
+        fixed.temp_selling_price = fixed.selling_price;
+        fixed.temp_profit = fixed.profit;
+    };
+  
+    // Function to save edited item
+    $scope.saveFixed = function(fixed) {
+        fixed.editMode = false;
+        // Send edited data to PHP backend to update in MySQL database
+        $http.post('fixed.php?action=update', fixed).then(function(response) {
+            $scope.fetchData();
+        });
+    };
+  
+    // Function to cancel editing
+    $scope.cancelEditFixed = function(fixed) {
+        fixed.editMode = false;
+
+    };
+  
+    // Function to delete an item
+    $scope.deleteFixed = function(fixed_id) {
+        console.log('Deleting fixed with ID:', fixed_id);
+        // Send request to PHP backend to delete item from MySQL database
+        $http.post('fixed.php?action=delete', { fixed_id: fixed_id }).then(function(response) {
+            $scope.fetchData();
+        });
+    };
+  
+    // Call the fetchData function initially to populate the table
+    $scope.fetchData();
+  });
+  
+  
+  //liquid assets
+  app.controller('liquidCntrl', function($scope, $http) {
+    $scope.liquidList = []; // Array to store fetched data items
+    $scope.liquidData = {}; // Object to store form data item
+  
+    // Function to fetch items from database
+    $scope.fetchData = function() {
+        $http.get('liquid.php?action=read').then(function(response) {
+            $scope.liquidList = response.data;
+        });
+    };
+  
+    // Function to add a new item
+    $scope.submit_liquidForm = function() {
+        $scope.liquidList.push(angular.copy($scope.liquidData));
+        $scope.saveFormDataToDatabase($scope.liquidData);
+        $scope.liquidData = {}; // Clear form fields
+    };
+  
+    // Function to save form data to the database
+    $scope.saveFormDataToDatabase = function(data) {
+        // Send data to PHP backend to save in MySQL database
+        $http.post('liquid.php?action=create', $scope.liquidData).then(function() {
+            $scope.fetchData();
+            $scope.liquidData = {}; // Clear form fields
+        });
+    };
+  
+    // Function to edit an item
+    $scope.editLiquid = function(liquid) {
+        liquid.editMode = true;
+        // Backup the original data in case of cancel
+        liquid.temp_liquid_id = liquid.liquid_id;
+        liquid.temp_name = liquid.name;
+        liquid.temp_quantity = liquid.quantity;
+        liquid.temp_date_acquired = liquid.date_acquired;
+        liquid.temp_purchase_price = liquid.purchase_price;
+        liquid.temp_selling_price = liquid.selling_price;
+        liquid.temp_profit = liquid.profit;
+    };
+  
+    // Function to save edited item
+    $scope.saveLiquid = function(liquid) {
+        liquid.editMode = false;
+        // Send edited data to PHP backend to update in MySQL database
+        $http.post('liquid.php?action=update', liquid).then(function(response) {
+            $scope.fetchData();
+        });
+    };
+  
+    // Function to cancel editing
+    $scope.cancelEditLiquid = function(liquid) {
+        liquid.editMode = false;
+    };
+  
+    // Function to delete an item
+    $scope.deleteLiquid = function(liquid_id) {
+        console.log('Deleting liquid with ID:', liquid_id);
+        // Send request to PHP backend to delete item from MySQL database
+        $http.post('liquid.php?action=delete', { liquid_id: liquid_id }).then(function(response) {
+            $scope.fetchData();
+        });
+    };
+  
+    // Call the fetchData function initially to populate the table
+    $scope.fetchData();
+  });
+
+</script>
+  </body>
+</html>
