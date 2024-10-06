@@ -52,7 +52,7 @@ The Finance Management Web App is a comprehensive tool designed to manage variou
 5. 🌐 **Access the Application**
 
     1. **Open Browser:**
-       - Open your web browser and navigate to `http://localhost/finance-management` to access the Finance Management Web App.
+       - Open your web browser and navigate to `http://localhost/fs` to access the Finance Management Web App.
 
 ## Usage
 
